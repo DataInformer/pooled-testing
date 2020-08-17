@@ -97,8 +97,8 @@ class PoolGenerator:
             print('Solve first')
             return
         print('We placed each sample in {} pools.\n'.format(self.pools_per_sample))
-        print('With this arrangement, we might need {} follow up tests for '
-              'each pool that is positive\n'.format(self.repeats))
+        print('With this arrangement, we might need up to {} follow up tests for '
+              'each pool that is positive\n'.format(0 if self.repeats==1 else self.repeats))
         print('The pool sizes range from {} to {}, with an average of {}'.format(
             self.pool_counts.min(), self.pool_counts.max(), np.mean(self.pool_counts)
         ))
