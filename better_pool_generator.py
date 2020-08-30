@@ -20,6 +20,13 @@ class PoolGenerator:
         # print(self.repeats)
 
     def _get_pps(self):
+        '''
+        Decides how many pools each sample should be part of.
+        Optimal would be the smallest number of pools that will allow
+        unique identification of the positive case.  If not possible, the
+        maximum of num_pools choose pools_per_sample is picked.
+        :return:
+        '''
         powers = [comb(self.num_pools, i) for i in range(self.num_pools)]
         for i,pow in sorted(enumerate(powers), key=lambda x:x[1]):
             if pow >= self.num_samples:
@@ -44,6 +51,10 @@ class PoolGenerator:
         self.pool_used = {k:set(v) for k,v in self.pool_used.items()}
 
     def get_pools(self):
+        '''
+        Output for using in practice; lists out the members of each pool
+        :return:
+        '''
         if not self.solved:
             self._solve()
         self.sample_pools = [self.combos[k] for k in self.keepers]
